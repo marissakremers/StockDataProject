@@ -1,4 +1,4 @@
-var stockData = [ 
+let stockData = [ 
     { 
         Symbol: "AAPL", 
         Company: "Apple Inc.", 
@@ -22,8 +22,7 @@ var stockData = [
         Price: "$554.52",
         Calls: "$1900.00",
         Puts: "$1800.00"
-    }, 
-    // Additions to stock data
+    },
     {
         Symbol: "UNH",
         Company: "UnitedHealth Group Incorporated",
@@ -66,48 +65,41 @@ var stockData = [
     }
 ]; 
 
+//Create thead element and header row
 function generateTableHead(table, data) {
-let thead = table.createTHead();
-let row = thead.insertRow();
-for (let key of data) {
-let th = document.createElement("th");
-let text = document.createTextNode(key);
-th.appendChild(text);
-row.appendChild(th);
-}
+    let thead = table.createTHead(); //create thead element
+    let row = thead.insertRow(); //inserts a new tr element (for header)
+    for (let key of data) {
+        let th = document.createElement("th"); //create th element from data keys
+        let text = document.createTextNode(key); //populate th
+        th.appendChild(text);
+        row.appendChild(th);
+    }
 }
 
+//Populate table with actual data from stockData
 function generateTable(table, data) {
-for (let element of data) {
-let row = table.insertRow();
-for (key in element) {
-  let cell = row.insertCell();
-  let text = document.createTextNode(element[key]);
-  cell.appendChild(text);
+    //for each data entry
+    for (let element of data) {
+        let row = table.insertRow(); //insert new tr element (for data)
+        //for each key in a particular data entry
+        for (key in element) {
+            let cell = row.insertCell(); //insert new td
+            let text = document.createTextNode(element[key]); //add text (node)
+            cell.appendChild(text);
+        }
+    }
 }
-}
-}
 
-let table = document.querySelector("table");
-let data = Object.keys(stockData[0]);
-generateTableHead(table, data); //create headings for table
-generateTable(table, stockData); //populate with data from stockData var
-
-
-
-
-
-
-
-// GIVEN CODE
+//Converts data to CSV (comma-delimited format)
 function convertArrayOfObjectsToCSV(args) { 
-    var result, ctr, keys, columnDelimiter, lineDelimiter, data; 
+    let result, ctr, keys, columnDelimiter, lineDelimiter, data; 
 
-    data = args.data || null;         if (data == null || !data.length) { 
-        return null; 
-    } 
+    data = args.data || null;         
+    if (data == null || !data.length) { return null; } 
 
-    columnDelimiter = args.columnDelimiter || ',';         lineDelimiter = args.lineDelimiter || '\n'; 
+    columnDelimiter = args.columnDelimiter || ',';         
+    lineDelimiter = args.lineDelimiter || '\n'; 
 
     keys = Object.keys(data[0]); 
 
@@ -118,7 +110,7 @@ function convertArrayOfObjectsToCSV(args) {
     data.forEach(function(item) { 
         ctr = 0; 
         keys.forEach(function(key) { 
-            if (ctr > 0) result += columnDelimiter; 
+            if (ctr > 0) { result += columnDelimiter; }
 
             result += item[key]; 
             ctr++; 
@@ -129,19 +121,31 @@ function convertArrayOfObjectsToCSV(args) {
     return result; 
 } 
 
+//Takes a filename and downloads
 function downloadCSV(args) { 
-    var data, filename, link; 
+    let data, filename, link; 
 
-    var csv = convertArrayOfObjectsToCSV({             data: stockData 
-    }); 
-    if (csv == null) return; 
+    let csv = convertArrayOfObjectsToCSV({ data: stockData }); 
+    if (csv == null) return; //error-handling
 
     filename = args.filename || 'export.csv'; 
 
+    //Regular expression pattern and assertion to match string 
+    //(^ to match beginning) + (\ to indicate next character is not special)
     if (!csv.match(/^data:text\/csv/i)) { 
         csv = 'data:text/csv;charset=utf-8,' + csv; 
     } 
     data = encodeURI(csv); 
 
-    link = document.createElement('a');         link.setAttribute('href', data);         link.setAttribute('download', filename); 
-    link.click();     }
+    link = document.createElement('a');         
+    link.setAttribute('href', data);         
+    link.setAttribute('download', filename); 
+    link.click();     
+}
+
+
+
+let table = document.querySelector("table"); //Select the table element
+let data = Object.keys(stockData[0]); //Get keys for stock data ("Symbol", "Company", ...)
+generateTableHead(table, data); //create headings for table
+generateTable(table, stockData); //populate with actual data from stockData

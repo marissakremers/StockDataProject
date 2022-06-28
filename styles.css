@@ -1,0 +1,55 @@
+/* If want to stay centered in screen */
+body {
+    font-family: 'Roboto', sans-serif;
+    color: rgb(64, 64, 73);
+}
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+th, td {
+    padding: 1em;
+    text-align: left;
+}
+#CSV-download {
+    color: rgb(66, 59, 172);
+    text-decoration: none;
+    padding: 1em;
+}
+#CSV-download:hover {
+    color: rgb(108, 97, 255);
+}
+
+
+
+
+/* If want it to grow with page */
+/* body {
+    font-family: 'Roboto', sans-serif;
+    color: rgb(64, 64, 73);
+}
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#CSV-download, h1 {
+    display: flex;
+    justify-content: center;
+}
+th, td {
+    padding: 1em;
+    text-align: left;
+    flex: 1
+}
+#CSV-download {
+    color: rgb(66, 59, 172);
+    text-decoration: none;
+    padding: 1em;
+
+}
+#CSV-download:hover {
+    color: rgb(108, 97, 255);
+} */
