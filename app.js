@@ -121,7 +121,7 @@ function convertArrayOfObjectsToCSV(args) {
     return result; 
 } 
 
-//Takes a filename and downloads
+//Takes a filename and saves new CSV formatted data there
 function downloadCSV(args) { 
     let data, filename, link; 
 
